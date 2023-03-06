@@ -1,9 +1,6 @@
 def subset(input_list, start_index, end_index):
-    temp_list = []
-    for i in range(start_index, end_index + 1):
-        temp_list.append(input_list[i])
-    return temp_list     
-    #input_list[start_index:end_index]
+
+    return input_list[start_index:end_index]
 
 def every_nth(input_list, step_size):
     temp_list = []
@@ -11,14 +8,14 @@ def every_nth(input_list, step_size):
         temp_list.append(input_list[i])
     return temp_list    
 
-def unique(input_list) -> bool:
-    flag = False
-    for i in input_list:
-        if (input_list.count(i) == 1):
-            return True #flag = True
-            #break
+def unique(input_list:list) -> bool:
+    temp_list = sum(input_list)
+    i = 0
+    while i < len(input_list) and input_list.count(input_list[i]) == 1:
+        i += 1
+    
 
-    return False #flag
+    return len(input_list) == i
 
 def flatten(input_list):
     output_list = []
