@@ -89,7 +89,10 @@ def invert_bool_array(arr : np.array) -> np.array:
 # Ki: [1,2,3,4]
 # flatten()
 
+def flatten(arr : np.array) -> np.array:
+    return arr.flatten()
 
+flatten(np.array([[1,2], [3,4]]))
 # %%
 
 
