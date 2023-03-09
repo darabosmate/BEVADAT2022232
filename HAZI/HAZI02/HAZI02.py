@@ -140,8 +140,8 @@ def array_multi(arr : np.array)-> int:
 # array_multi_2d()
 
 def array_multi_2d(arr : np.array)-> np.array:
-    temp_arr = np.array(np.shape(arr))
-    temp_arr[:] = np.multiply(arr[:])
+    temp_arr = np.arange(np.shape(arr)[0])
+    temp_arr[:] = np.prod(arr[:])
 
     i = 0
     return temp_arr
@@ -155,6 +155,11 @@ def array_multi_2d(arr : np.array)-> np.array:
 # Ki: [[0,0,0,0],[0,1,2,0],[0,3,4,0],[0,0,0,0]]
 # add_border()
 
+def add_border(arr : np.array)-> np.array:
+    return np.pad(arr, pad_width=1)
+
+#add_border(np.array([[1,2],[3,4]]))
+
 
 # %%
 # A KÖTVETKEZŐ FELADATOKHOZ NÉZZÉTEK MEG A NUMPY DATA TYPE-JÁT!
@@ -165,10 +170,18 @@ def array_multi_2d(arr : np.array)-> np.array:
 # Ki: ['2023-03-01', '2023-03-02', .. , '2023-03-31',]
 # list_days()
 
+def list_days(date1: str, date2: str)-> np.array:
+    return np.arange(date1, date2, dtype='datetime64[D]')
+
+#list_days('2023-02', '2023-04')
 # %%
 #(13) Írj egy fügvényt ami vissza adja az aktuális dátumot az alábbi formában: YYYY-MM-DD. Térjen vissza egy 'numpy.datetime64' típussal.
 # Be:
 # Ki: 2017-03-24
+#get_act_date():
+
+def get_act_date()-> np.datetime64():
+    return np.datetime64()
 
 
 # %%
