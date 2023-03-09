@@ -117,7 +117,7 @@ def replace_by_value(arr : np.array, i : int)-> np.array:
 
     return arr
 
-replace_by_value(np.array([1, 2, 5, 0]), 2)
+#replace_by_value(np.array([1, 2, 5, 0]), 2)
 
 
 # %%
@@ -181,13 +181,16 @@ def list_days(date1: str, date2: str)-> np.array:
 #get_act_date():
 
 def get_act_date()-> np.datetime64():
-    return np.datetime64()
+    return np.datetime64("today")
 
-
+#get_act_date()
 # %%
 #(14) Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:02:00 óta. Int-el térjen vissza
 # Be: 
 # Ki: másodpercben az idó, int-é kasztolva
-# sec_from_1970()
+def sec_from_1970():
+    x = np.datetime64("now") - np.datetime64("1970-01-01T00:02:00")
+    return x.astype(int)
 
-
+#sec_from_1970()
+# %%
