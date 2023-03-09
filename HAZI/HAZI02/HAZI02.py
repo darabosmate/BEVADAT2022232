@@ -117,7 +117,7 @@ def replace_by_value(arr : np.array, i : int)-> np.array:
 
     return arr
 
-#replace_by_value(np.array([1, 2, 5, 0]), 2)
+replace_by_value(np.array([1, 2, 5, 0]), 2)
 
 
 # %%
@@ -127,11 +127,27 @@ def replace_by_value(arr : np.array, i : int)-> np.array:
 # array_multi()
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
 
+def array_multi(arr : np.array)-> int:
+
+    return np.prod(arr)
+
+#array_multi(np.array([1,2,3,4]))
+
 # %%
-#(10) Készíts egy olyan függvényt, ami egy 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
+#(10) TODO Készíts egy olyan függvényt, ami egy 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
 # Be: [[1, 2], [3, 4]]
 # Ki: [2, 12]
 # array_multi_2d()
+
+def array_multi_2d(arr : np.array)-> np.array:
+    temp_arr = np.array(np.shape(arr))
+    temp_arr[:] = np.multiply(arr[:])
+
+    i = 0
+    return temp_arr
+
+
+#array_multi_2d(np.array([[1, 2], [3, 4]]))
 
 # %%
 #(11) Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal. Bementként egy array-t várjon és kimenetként egy array jelenjen meg aminek van border-je
