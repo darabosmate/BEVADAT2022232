@@ -134,17 +134,14 @@ def array_multi(arr : np.array)-> int:
 #array_multi(np.array([1,2,3,4]))
 
 # %%
-#(10) TODO Készíts egy olyan függvényt, ami egy 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
+#(10) Készíts egy olyan függvényt, ami egy 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
 # Be: [[1, 2], [3, 4]]
 # Ki: [2, 12]
 # array_multi_2d()
 
 def array_multi_2d(arr : np.array)-> np.array:
-    temp_arr = np.arange(np.shape(arr)[0])
-    temp_arr[:] = np.prod(arr[:])
-
-    i = 0
-    return temp_arr
+    result = np.prod(arr, axis=1)
+    return result
 
 
 #array_multi_2d(np.array([[1, 2], [3, 4]]))
