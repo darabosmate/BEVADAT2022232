@@ -29,7 +29,7 @@ def column_swap(arr : np.array) -> np.array:
 # egyenlő elemszámúakra kell csak hogy működjön
 
 def compare_two_array(arr1 : np.array, arr2 : np.array) -> np.array:
-    return np.where(arr1[:] == arr2[:])[0]
+    return np.where(arr1 == arr2)
 
 ''' array([1, 3], dtype=int64)'''
 #compare_two_array(np.array([7,8,9, 10]), np.array([9,8,7, 10]))
