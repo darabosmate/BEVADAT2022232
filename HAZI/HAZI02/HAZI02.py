@@ -16,10 +16,10 @@ import numpy as np
 # column_swap()
 
 def column_swap(arr : np.array) -> np.array:
-    arr[:, [0,1]] = arr[:, [1, 0]]
+    arr = np.flip(arr, 1)
     return arr
 
-#column_swap(np.array([[1,2],[3,4]]))
+#column_swap(np.array([[1,2, 3, 4],[3,4, 5, 6]]))
 
 # %%
 #(2) Készíts egy olyan függvényt ami összehasonlít két array-t és adjon vissza egy array-ben, hogy hol egyenlőek 
