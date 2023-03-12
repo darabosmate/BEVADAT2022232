@@ -41,7 +41,7 @@ def compare_two_array(arr1 : np.array, arr2 : np.array) -> np.array:
 # get_array_shape()
 # 3D-vel még műküdnie kell!, 
 
-def get_array_shape(arr : np.array)->np.array:
+def get_array_shape(arr : np.array)->str:
     if len(np.shape(arr)) == 3:
         return f"sor: {np.shape(arr)[0]}, oszlop: {np.shape(arr)[1]}, melyseg: {np.shape(arr)[2]}"
     else:
@@ -60,11 +60,12 @@ def get_array_shape(arr : np.array)->np.array:
 
 def encode_Y(arr : np.array, n : int)-> np.array:
     temp_arr = np.zeros((np.shape(arr)[0], n))
-    temp_arr[np.arange(n), arr[:]] = 1
+    
+    temp_arr[np.arange(arr.shape[0]), arr] = 1
     return temp_arr
 
 
-#encode_Y([1, 2, 0, 3], 4)
+encode_Y(np.array([1, 2, 0, 3, 2, 0]), 4)
 
 # %%
 #(5) A fenti feladatnak valósítsd meg a kiértékelését. Adj meg a 2d array-t és adj vissza a decodolt változatát
@@ -98,11 +99,11 @@ def eval_classification(input_list : list, arr : np.array)-> str:
 # Ki: [-1,2,-1,4,-1,6]
 # repalce_odd_numbers()
 
-def repalce_odd_numbers(arr : np.array)-> np.array:
+def replace_odd_numbers(arr : np.array)-> np.array:
     arr[np.where(arr % 2 == 1)] = -1
     return arr
 
-#repalce_odd_numbers(np.array([1,2,3,4,5,6]))
+replace_odd_numbers(np.array([1,2,3,4,5,6]))
 
 # %%
 #(8) Készíts egy olyan függvényt, ami egy array értékeit -1 és 1-re változtatja, attól függően, hogy az adott elem nagyobb vagy kisebb a paraméterként megadott számnál.
