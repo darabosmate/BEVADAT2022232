@@ -47,12 +47,12 @@ def get_array_shape(arr : np.array)->str:
     elif len(np.shape(arr)) == 2:
         return f"sor: {np.shape(arr)[0]}, oszlop: {np.shape(arr)[1]}, melyseg: 1"
     else:
-        return f"sor: 1, oszlop: 1, melyseg: 1"
+        return f"sor: 1, oszlop: {arr.shape[0]}, melyseg: 1"
     
 
 #get_array_shape(np.array([[[1,2,3], [4,5,6]], [[1,2,3], [4,5,6]], [[1,2,3], [4,5,6]], [[1,2,3], [4,5,6]]]))
 #get_array_shape(np.array([[1,2,3], [4,5,6]]))
-#get_array_shape(np.array([0]))
+#get_array_shape(np.array([0, 3]))
 
 # %%
 #(4) Készíts egy olyan függvényt, aminek segítségével elő tudod állítani egy neurális hálózat tanításához szükséges pred-et egy numpy array-ből. 
