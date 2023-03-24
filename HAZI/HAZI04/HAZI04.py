@@ -199,7 +199,20 @@ függvény neve: math_bar_plot
 '''
 
 # %%
+#TODO
+def math_bar_plot(df:pd.DataFrame)-> plt.Figure:
+    ndf = df.copy()
+    x = ndf['gender']
+    y = ndf['math score']
+    fig, ax = plt.subplots()
+    ax.bar(x, y)
+    ax.set_xlabel('Gender')
+    ax.set_ylabel('Math Score')
+    ax.set_title('Average Math Score by Gender')
+    
+    return fig
 
+#math_bar_plot(df)
 
 # %%
 ''' 
@@ -217,7 +230,19 @@ függvény neve: writing_hist
 '''
 
 # %%
+def writing_hist(df: pd.frame.DataFrame)->plt.Figure:
+    ndf = df.copy()
+    x = ndf['writing score']
+    y = ndf['asdfasdfadaf']
+    fig, ax = plt.subplots()
+    ax.bar(x, y)
+    ax.set_xlabel('Writing Score')
+    ax.set_ylabel('Number of Students')
+    ax.set_title('Distribution of Writing Scores')
+    
+    return fig
 
+#writing_hist(df)
 
 # %%
 ''' 
