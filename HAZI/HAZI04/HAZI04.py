@@ -25,7 +25,7 @@ def csv_to_df(path:str)->pd.core.frame.DataFrame:
     ndf = pd.read_csv(path)
     return ndf
 
-df = csv_to_df('StudentsPerformance.csv')
+#df = csv_to_df('StudentsPerformance.csv')
 
 # %%
 '''
@@ -162,6 +162,25 @@ függvény neve: add_grade
 '''
 
 # %%
+def add_grade(df: pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
+    ndf = df.copy()
+    ndf["grade"] = ndf(function=grade((ndf["math score"] + ndf["writing score"] + ndf["reading score"]) / 300))
+    return ndf
+
+def grade(score: float)->str:
+    if score >= 0.9:
+        return 'A'
+    elif score >= 0.8:
+        return 'B'
+    elif score >= 0.7:
+        return 'C'
+    elif score >= 0.6:
+        return 'D'
+    else:
+        return 'F'
+
+add_grade(df)
+
 
 
 # %%
