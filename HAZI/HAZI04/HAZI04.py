@@ -179,7 +179,7 @@ def grade(score: float)->str:
     else:
         return 'F'
 
-add_grade(df)
+#add_grade(df)
 
 
 
