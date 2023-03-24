@@ -164,7 +164,7 @@ függvény neve: add_grade
 # %%
 def add_grade(df: pd.core.frame.DataFrame)->pd.core.frame.DataFrame:
     ndf = df.copy()
-    ndf["grade"] = ndf(function=grade((ndf["math score"] + ndf["writing score"] + ndf["reading score"]) / 300))
+    ndf["grade"] = ndf.apply(lambda row: grade((row.at["math score"] + row["writing score"] +row["reading score"]) / 300), axis=1)
     return ndf
 
 def grade(score: float)->str:
