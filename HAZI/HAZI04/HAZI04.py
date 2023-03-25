@@ -1,3 +1,4 @@
+#%%
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -44,20 +45,18 @@ def add_grade(df_data:pd.DataFrame) -> pd.core.frame.DataFrame:
     new_df.drop('percent', axis=1, inplace=True)
     return new_df
 
-#TODO
 def math_bar_plot(df:pd.DataFrame)-> plt.Figure:
     ndf = df.copy()
-    x = ndf['gender']
-    y = ndf['math score']
+    avg_per_gender = ndf.groupby("gender")["math score"].mean()
     fig, ax = plt.subplots()
-    ax.bar(x, y)
+    ax.bar(avg_per_gender.index, avg_per_gender.values)
     ax.set_xlabel('Gender')
     ax.set_ylabel('Math Score')
     ax.set_title('Average Math Score by Gender')
     
     return fig
 
-def writing_hist(df: pd.frame.DataFrame)->plt.Figure:
+def writing_hist(df: pd.DataFrame)->plt.Figure:
     ndf = df.copy()
     x = ndf['writing score']
     y = ndf['asdfasdfadaf']
@@ -66,5 +65,9 @@ def writing_hist(df: pd.frame.DataFrame)->plt.Figure:
     ax.set_xlabel('Writing Score')
     ax.set_ylabel('Number of Students')
     ax.set_title('Distribution of Writing Scores')
-    
+    plt.show()
     return fig
+
+
+df = csv_to_df("/home/mate/Documents/repos/BEVADAT2022232/HAZI/HAZI04/StudentsPerformance.csv")
+math_bar_plot(df)
