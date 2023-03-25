@@ -59,15 +59,34 @@ def math_bar_plot(df:pd.DataFrame)-> plt.Figure:
 def writing_hist(df: pd.DataFrame)->plt.Figure:
     ndf = df.copy()
     x = ndf['writing score']
-    y = ndf['asdfasdfadaf']
+
     fig, ax = plt.subplots()
-    ax.bar(x, y)
+
     ax.set_xlabel('Writing Score')
     ax.set_ylabel('Number of Students')
     ax.set_title('Distribution of Writing Scores')
-    plt.show()
+
+    plt.hist(x)
+
     return fig
+
+''' 
+Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan kördiagramot,
+ami vizualizálja a diákok etnikum csoportok szerinti eloszlását százalékosan.
+
+Érdemes megszámolni a diákok számát, etnikum csoportonként,majd a százalékos kirajzolást az autopct='%1.1f%%' paraméterrel megadható.
+Mindegyik kör szelethez tartozzon egy címke, ami a csoport nevét tartalmazza.
+A diagram címe legyen: 'Proportion of Students by Race/Ethnicity'
+
+Egy példa a bemenetre: df_data
+Egy példa a kimenetre: fig
+return type: matplotlib.figure.Figure
+függvény neve: ethnicity_pie_chart
+'''
+
+
+
 
 
 df = csv_to_df("/home/mate/Documents/repos/BEVADAT2022232/HAZI/HAZI04/StudentsPerformance.csv")
-math_bar_plot(df)
+print(type(writing_hist(df)))
