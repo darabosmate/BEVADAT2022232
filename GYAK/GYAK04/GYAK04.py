@@ -133,6 +133,7 @@ def plot_area(df:pd.DataFrame)->plt.Figure:
     x = ndf['area']
     countries = ndf['country']
     fig, ax = plt.subplots()
+    ax.set_title('Area of Countries')
     ax.pie(x, labels=countries)
     return fig
 
