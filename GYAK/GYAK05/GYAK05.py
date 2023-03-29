@@ -46,7 +46,8 @@ class KNNClassifier:
 
     def confusion_matrix(self):
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-        sns.heatmap(conf_matrix, annot=True)
+        #sns.heatmap(conf_matrix, annot=True)
+        return conf_matrix
 
     @staticmethod
     def load_csv(csv_path: str) -> Tuple[np.ndarray, np.ndarray]:
