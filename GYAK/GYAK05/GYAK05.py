@@ -8,6 +8,7 @@ from sklearn.metrics import confusion_matrix
 
 class KNNClassifier:
 
+    @property
     def k_neighbors(self):
         return self.k
 
@@ -54,4 +55,3 @@ class KNNClassifier:
         np.random.shuffle(dataset)
         x_, y_ = dataset[:, :4], dataset[:, -1]
         return x_, y_
-
