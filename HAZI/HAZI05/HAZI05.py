@@ -59,7 +59,7 @@ class KNNClassifier:
 
         labels_pred = []
 
-        for x_test_element in x_test:
+        for idx, x_test_element in x_test.iterrows():
 
             distances = self.euclidean(x_test_element)
 
@@ -69,13 +69,13 @@ class KNNClassifier:
 
             labels_pred.append(label_pred)
 
-        self.y_preds = labels_pred
+        self.y_preds = pd.DataFrame(labels_pred)
 
 
     def accuracy(self) -> float:
-        true_positive = (self.y_test == self.y_preds).sum()
+        true_positive = (self.y_test == pd.DataFrame(self.y_preds)).sum()
 
-        return true_positive / len(self.y_test) * 100
+        return true_positive / self.y_test.shape[0] * 100
 
 
     def confusion_matrix(self):
