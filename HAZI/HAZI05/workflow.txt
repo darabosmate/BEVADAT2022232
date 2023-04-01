@@ -1,4 +1,6 @@
 1. Létrehoztam a class-t, benne az alapokat a gyakorlat alapján
 2. load_csv függvénynél beállítottam hogy hozza létre a beimportált csv-ből a dataframe-et. ezt randomizáltam a pd.sample függvénnyel random_statet beállítotam. két részre szedtem a dataframet az elsőben az alap adatok vannak, a másodikban az eredmények.
 3. train_test_split ketté osztjuk a táblákat, azért hogy legyen min betanytani és a sikerességet vizsgálni.
-4.
+4. predict for ciklusban végig iterlál a test tábla sorain. minden test sorhoz kiszámolja a train tábla összes sorának távolságát. megnézi a k legközelebbi Outcome-ot és ezaalapján eldönti mit rak bele a y_preds-be. y_pred sorindexei megegyeznek az y_test sorindexeivel.
+5. ezek alpján lehet pontosságot mérni az accuracy függvénnyel. Itt már váltani kellett a dataframeről seriesre, az oszlopnév miatt.
+6.   
