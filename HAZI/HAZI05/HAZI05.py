@@ -61,7 +61,7 @@ class KNNClassifier:
 
         for idx, x_test_element in x_test.iterrows():
 
-            distances = self.euclidean(x_test_element)
+            distances = self.euclidean(x_test[idx, :])
 
             distances = np.array(sorted(zip(distances, self.y_train))) #######TODO
 
