@@ -90,6 +90,6 @@ class KNNClassifier:
         df = pd.read_csv(csv_path)
         df = df.sample(frac=1, random_state=42, ignore_index=True)
         x_ = df.iloc[:, :8]
-        y_ = pd.DataFrame(df['Outcome'])
+        y_ = df[['Outcome']] #pd.DataFrame(df['Outcome']) dupla [[]] = dataframet ad vissza series helyett
 
         return x_, y_
