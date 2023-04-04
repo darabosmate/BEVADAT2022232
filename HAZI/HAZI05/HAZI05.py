@@ -83,8 +83,8 @@ class KNNClassifier:
     def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:  # 2
         df = pd.read_csv(csv_path)
         df = df.sample(frac=1, random_state=42, ignore_index=True)
-        x_ = df.iloc[:, :8]
+        x_ = df.iloc[:, :-1]
         # pd.DataFrame(df['Outcome']) dupla [[]] = dataframet ad vissza series helyett
-        y_ = df[['Outcome']]
+        y_ = pd.DataFrame(df.iloc[:, -1])
 
         return x_, y_
