@@ -59,20 +59,12 @@ class KNNClassifier:
         self.y_preds = pd.Series(labels_pred)
 
     def accuracy(self) -> float:  # 6
-        #self.y_test, self.y_preds = self.y_test.align(self.y_preds, axis=1, copy=False)
-        #self.y_test.columns.name = None
         true_positive = (self.y_test == self.y_preds).sum()
 
         return true_positive / self.y_test.shape[0] * 100
 
-    def confusion_matrix(self):  # 7
-        conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-
-        return conf_matrix
-
     def best_k(self):
         ret = tuple((1, -1))
-        og_k = self.k
         for i in range(1, 21):
             self.k = i
             self.predict(self.x_test)
@@ -80,6 +72,11 @@ class KNNClassifier:
             if acc > ret[1]:
                 ret = (self.k, acc)
         return ret
+
+    def confusion_matrix(self):  # 7
+        conf_matrix = confusion_matrix(self.y_test, self.y_preds)
+
+        return conf_matrix
 
     @staticmethod
     def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.Series]:  # 2

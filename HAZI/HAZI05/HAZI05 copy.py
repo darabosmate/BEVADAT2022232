@@ -68,7 +68,7 @@ class KNNClassifier:
 
         return conf_matrix
 
-    def best_k(self):
+    def best_k(self): #8
         ret = tuple((1, -1))
         for i in range(1, 21):
             self.k = i
