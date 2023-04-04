@@ -30,7 +30,7 @@ class KNNClassifier:
 
         self.y_preds = None
 
-    def train_test_split(self, features: pd.DataFrame, labels: pd.Series) -> None:  # 3
+    def train_test_split(self, features: pd.DataFrame, labels: pd.DataFrame) -> None:  # 3
 
         test_size = int(features.shape[0] * self.test_split_ratio)
 
@@ -38,11 +38,11 @@ class KNNClassifier:
 
         assert features.shape[0] == test_size + train_size, "Size mismatch!"
 
-        self.x_train  = features.iloc[:train_size, :].reset_index(drop=True)
-        self.y_train = labels.iloc[:train_size].reset_index(drop=True)
+        self.x_train, self.y_train = features.iloc[:train_size,
+                                                   :], labels.iloc[:train_size].reset_index(drop=True)
 
-        self.x_test = features.iloc[train_size:train_size + test_size, :].reset_index(drop=True)
-        self.y_test = labels.iloc[train_size:train_size + test_size].reset_index(drop=True)
+        self.x_test, self.y_test = features.iloc[train_size:train_size +
+                                                 test_size, :], labels.iloc[train_size:train_size + test_size].reset_index(drop=True)
 
     def euclidean(self, element_of_x: pd.DataFrame) -> pd.DataFrame:  # 4
 
@@ -56,12 +56,10 @@ class KNNClassifier:
             distances = pd.concat([distances, self.y_train], axis=1).sort_values(by=0)
             label_pred = mode(distances.iloc[:self.k,1],keepdims=False).mode
             labels_pred.append(label_pred)
-        self.y_preds = pd.Series(labels_pred)
+        self.y_preds = pd.DataFrame(labels_pred)
 
     def accuracy(self) -> float:  # 6
-        #self.y_test, self.y_preds = self.y_test.align(self.y_preds, axis=1, copy=False)
-        #self.y_test.columns.name = None
-        true_positive = (self.y_test == self.y_preds).sum()
+        true_positive = (self.y_test.iloc[:, 0] == self.y_preds.iloc[:, 0]).sum()
 
         return true_positive / self.y_test.shape[0] * 100
 
@@ -72,21 +70,21 @@ class KNNClassifier:
 
     def best_k(self):
         ret = tuple((1, -1))
-        og_k = self.k
         for i in range(1, 21):
             self.k = i
             self.predict(self.x_test)
-            acc = round(self.accuracy(), 2)
+            acc = self.accuracy()
             if acc > ret[1]:
-                ret = (self.k, acc)
+                ret = (self.k, acc.round(2))
+
         return ret
 
     @staticmethod
-    def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.Series]:  # 2
+    def load_csv(csv_path: str) -> Tuple[pd.DataFrame, pd.DataFrame]:  # 2
         df = pd.read_csv(csv_path)
         df = df.sample(frac=1, random_state=42, ignore_index=True)
         x_ = df.iloc[:, :-1]
         # pd.DataFrame(df['Outcome']) dupla [[]] = dataframet ad vissza series helyett
-        y_ = df.iloc[:, -1] #dataframe/series
+        y_ = pd.DataFrame(df.iloc[:, -1])
 
         return x_, y_
