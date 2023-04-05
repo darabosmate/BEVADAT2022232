@@ -4,7 +4,9 @@
 4. predict for ciklusban végig iterlál a test tábla sorain. minden test sorhoz kiszámolja a train tábla összes sorának távolságát. megnézi a k legközelebbi Outcome-ot és ezaalapján eldönti mit rak bele a y_preds-be. y_pred sorindexei megegyeznek az y_test sorindexeivel.
 5. ezek alpján lehet pontosságot mérni az accuracy függvénnyel. Itt már váltani kellett a dataframeről seriesre, az oszlopnév miatt.
 6. Javitva lett a beolvasasnal hogy az utolso oszlopot olvassa be nem a 8-at vagy nem nev alapjan
- + egy oszlopot y/y_test fataframe helyett series-kent taroljuk 
+ + egy oszlopot y/y_test fataframe helyett series-kent taroljuk 2023.04.05 update látszólag ez medolgotta a hibát
 
 Hibák 2023.04.03:  2[0], 5[0], 6[error], 8[error]
                 load_csv, predict, accuracy, best_k
+
+2023.04.04-es unit test alapján minden hibátlan
