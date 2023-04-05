@@ -54,12 +54,13 @@ class NJCleaner:
 
     def drop_unnecessary_columns(self) -> pd.DataFrame:
         df = self.convert_delay()
-        df.drop(columns=['train_id', 'scheduled_time',
-                'actual_time', 'delay_minutes'], inplace=True)
+        df = df.drop(columns=['train_id', 'scheduled_time',
+                'actual_time', 'delay_minutes'])
         return df
 
     def save_first_60k(self, csv_path):
-        self.data.head(60000).to_csv(csv_path, index=False)
+        df = self.drop_unnecessary_columns()
+        df.head(60000).to_csv(csv_path, index=False)
 
     def prep_df(self, csv_path='data/NJ.csv'):
         self.order_by_scheduled_time()
