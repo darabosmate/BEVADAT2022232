@@ -20,7 +20,6 @@ class NJCleaner:
 
     def convert_date_to_day(self) -> pd.DataFrame():
         df = self.drop_columns_and_nan()
-        df['day'] = df['date'].datetime.weekday()
+        #df['day'] = pd.to_datetime(df['date'], format='%Y-%m-%d').dt.day_name
+        df['day'] = pd.to_datetime(df['date']).dt.day_name()
         return df
-
-
