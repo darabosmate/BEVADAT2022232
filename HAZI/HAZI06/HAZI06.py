@@ -60,5 +60,6 @@ clean_data = np.genfromtxt("/home/mate/Documents/repos/BEVADAT2022232/HAZI/HAZI0
 print(clean_data[:10, :])
 
 dt = DecisionTreeClassifier()
-dt.fit(clean_data[:, :-1], clean_data[:, -1])
+dt.fit(clean_data, clean_data)
 dt.print_tree()
+
