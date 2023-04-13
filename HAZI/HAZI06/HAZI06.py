@@ -49,3 +49,17 @@ HAZI06-
 ##################################################################
 """
 
+from DecisionTreeClassifier import DecisionTreeClassifier
+from NJCleaner import NJCleaner
+import numpy as np
+
+#nj_cleaner = NJCleaner(r"/home/mate/Documents/repos/BEVADAT2022232/HAZI/HAZI06/2018_03.csv")
+#nj_cleaner.save_first_60k("HAZI06.csv")
+
+clean_data = np.genfromtxt("/home/mate/Documents/repos/BEVADAT2022232/HAZI/HAZI06/NJ_60k.csv", delimiter=',', dtype=str)
+print(clean_data[:10, :])
+
+dt = DecisionTreeClassifier()
+dt.fit(clean_data, clean_data)
+dt.print_tree()
+
