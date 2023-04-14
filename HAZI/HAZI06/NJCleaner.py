@@ -30,8 +30,8 @@ class NJCleaner:
         return df
 
     def convert_date_to_day(self) -> pd.DataFrame:
-        df = self.drop_columns_and_nan()
-
+        #df = self.drop_columns_and_nan()
+        df = self.data
         df['day'] = pd.to_datetime(df['date']).dt.day_name()
 
         df = df.drop(columns=['date'])
@@ -39,7 +39,9 @@ class NJCleaner:
 
     def convert_scheduled_time_to_part_of_the_day(self) -> pd.DataFrame:
 
-        df = self.convert_date_to_day()
+        #df = self.convert_date_to_day()
+        df = self.data
+
 
         # bins_list = [datetime.strptime(date, "%H:%M:%S").time() for date in ['00:00:00', '04:00:00', '08:00:00',  '12:00:00',  '16:00:00',  '20:00:00',  '23:59:59']]
 
@@ -49,7 +51,7 @@ class NJCleaner:
 
 
                                        'late_night', 'early_morning', 'morning', 'afternoon', 'evening', 'night',])
-
+        df = df.drop(columns=['scheduled_time'])
         return df
 
     '''4:00-7:59 -- early_morning
@@ -71,7 +73,10 @@ class NJCleaner:
 
     def convert_delay(self) -> pd.DataFrame:
 
-        df = self.convert_scheduled_time_to_part_of_the_day()
+        #df = self.convert_scheduled_time_to_part_of_the_day()
+        df = self.data
+
+
 
         df['delay'] = pd.cut(df['delay_minutes'],
 
@@ -85,31 +90,24 @@ class NJCleaner:
 
     def drop_unnecessary_columns(self) -> pd.DataFrame:
 
-        df = self.convert_delay()
+        #df = self.convert_delay()
+        df = self.data
 
-        df = df.drop(columns=['train_id', 'scheduled_time',
 
-
-                              'actual_time', 'delay_minutes'])
+        df = df.drop(columns=['train_id', 'actual_time', 'delay_minutes'])
         return df
 
     def save_first_60k(self, path):
-
-        df = self.drop_unnecessary_columns()
+        #df = self.drop_unnecessary_columns()
+        df = self.data
 
         df.head(60000).to_csv(path, index=False)
 
     def prep_df(self, path='data/NJ.csv'):
-
         self.data = self.order_by_scheduled_time()
         self.data = self.drop_columns_and_nan()
-
         self.data = self.convert_date_to_day()
-
         self.data = self.convert_scheduled_time_to_part_of_the_day()
-
         self.data = self.convert_delay()
-
         self.data = self.drop_unnecessary_columns()
-
         self.save_first_60k(path)
