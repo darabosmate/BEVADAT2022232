@@ -61,14 +61,44 @@ A 2.6 feladatba bekerült, hogy a 'scheduled_time' oszlopot el kell dobni
 from DecisionTreeClassifier import DecisionTreeClassifier
 from NJCleaner import NJCleaner
 import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 #nj_cleaner = NJCleaner(r"/home/mate/Documents/repos/BEVADAT2022232/HAZI/HAZI06/2018_03.csv")
 #nj_cleaner.save_first_60k("HAZI06.csv")
 
-clean_data = np.genfromtxt("/home/mate/Documents/repos/BEVADAT2022232/HAZI/HAZI06/NJ_60k.csv", delimiter=',', dtype=str)
-print(clean_data[:10, :])
+clean_data = np.genfromtxt(r"HAZI\HAZI06\NJ_60k.csv", delimiter=',', dtype=str)
+X, Y = clean_data[:, :-1], clean_data[:,-1:] #kerdojel hogy szabad e ezt csinalni numpyban clean_data[:,-1:] hogy jo legyen a shape
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=.2, random_state=41)
 
-dt = DecisionTreeClassifier()
-dt.fit(clean_data, clean_data)
-dt.print_tree()
 
+
+dtc = DecisionTreeClassifier(min_samples_split=4)
+dtc.fit(X_train, Y_train)
+
+Y_pred = dtc.predict(X_test)
+print(accuracy_score(Y_test, Y_pred))
+
+
+
+
+
+
+
+
+'''######################### 4. FELADAT ############################
+0. sorry us billentyuzetrol irok
+1. kiprobaltam a pelda csv-vel, nem ment a szetvalasztas X, Y azt javitottam
+2. megcsinaltam az addatok szetvalasztasat
+3. peldanyositottam a fat
+4. fitteltem a syetvalasztott data-ra
+5. sklearn accuracy_score-ral megneztem hogy alap beallitason hogyan viselkedik. 78% szerintem eleg jo
+6. kiprobaltam mas min_sample_splittel pl.: 3, 4re rosszabb pontossagot kaptunk
+
+
+
+
+
+
+
+##################################################################'''
