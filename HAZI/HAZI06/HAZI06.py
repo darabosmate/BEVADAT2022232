@@ -71,14 +71,15 @@ clean_data = np.genfromtxt(r"HAZI\HAZI06\NJ_60k.csv", delimiter=',', dtype=str)
 X, Y = clean_data[:, :-1], clean_data[:,-1:] #kerdojel hogy szabad e ezt csinalni numpyban clean_data[:,-1:] hogy jo legyen a shape
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=.2, random_state=41)
 
-for i in range(3, 124, 10):
-    try:
-        dtc = DecisionTreeClassifier(min_samples_split=i, max_depth=3)
-        dtc.fit(X_train, Y_train)
-        Y_pred = dtc.predict(X_test)
-        print("min_samples: ",i ," accuracy: ", accuracy_score(Y_test, Y_pred))
-    except:
-        pass
+for i in range(0, 101, 25):
+    for depth in range(0, 16, 5):
+        try:
+            dtc = DecisionTreeClassifier(min_samples_split=i, max_depth=depth)
+            dtc.fit(X_train, Y_train)
+            Y_pred = dtc.predict(X_test)
+            print("min_samples: ",i , "max_depth: ", depth," accuracy: ", accuracy_score(Y_test, Y_pred))
+        except:
+            pass
 
 #Y_pred = dtc.predict(X_test)
 #print(accuracy_score(Y_test, Y_pred))
@@ -89,7 +90,9 @@ for i in range(3, 124, 10):
 
 
 
-
+dtc = DecisionTreeClassifier(min_samples_split=75, max_depth=15)
+dtc.fit(X_train, Y_train)
+Y_pred = dtc.predict(X_test)
 
 
 '''######################### 4. FELADAT ############################
@@ -118,6 +121,21 @@ min_samples:  123  accuracy:  0.7822681443213065
 tul kicsi a max_depth!!!!
 
 
+
+min_samples:  0 max_depth:  0  accuracy:  0.7766019498375135
+min_samples:  0 max_depth:  5  accuracy:  0.7837680193317224
+min_samples:  25 max_depth:  0  accuracy:  0.7766019498375135
+min_samples:  25 max_depth:  5  accuracy:  0.7836846929422548
+min_samples:  25 max_depth:  10  accuracy:  0.7917673527206066
+min_samples:  25 max_depth:  15  accuracy:  0.7880176651945672
+min_samples:  50 max_depth:  0  accuracy:  0.7766019498375135
+min_samples:  50 max_depth:  5  accuracy:  0.7837680193317224
+min_samples:  50 max_depth:  10  accuracy:  0.7921839846679444
+min_samples:  50 max_depth:  15  accuracy:  0.7926839430047496
+min_samples:  75 max_depth:  0  accuracy:  0.7766019498375135
+min_samples:  75 max_depth:  5  accuracy:  0.7837680193317224
+min_samples:  75 max_depth:  10  accuracy:  0.7936838596783601
+min_samples:  75 max_depth:  15  accuracy:  0.7968502624781268
 
 
 
