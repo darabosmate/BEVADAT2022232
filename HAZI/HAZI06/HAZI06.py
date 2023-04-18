@@ -71,13 +71,19 @@ clean_data = np.genfromtxt(r"HAZI\HAZI06\NJ_60k.csv", delimiter=',', dtype=str)
 X, Y = clean_data[:, :-1], clean_data[:,-1:] #kerdojel hogy szabad e ezt csinalni numpyban clean_data[:,-1:] hogy jo legyen a shape
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size=.2, random_state=41)
 
+for i in range(3, 124, 10):
+    try:
+        dtc = DecisionTreeClassifier(min_samples_split=i, max_depth=3)
+        dtc.fit(X_train, Y_train)
+        Y_pred = dtc.predict(X_test)
+        print("min_samples: ",i ," accuracy: ", accuracy_score(Y_test, Y_pred))
+    except:
+        pass
+
+#Y_pred = dtc.predict(X_test)
+#print(accuracy_score(Y_test, Y_pred))
 
 
-dtc = DecisionTreeClassifier(min_samples_split=4)
-dtc.fit(X_train, Y_train)
-
-Y_pred = dtc.predict(X_test)
-print(accuracy_score(Y_test, Y_pred))
 
 
 
@@ -94,6 +100,22 @@ print(accuracy_score(Y_test, Y_pred))
 4. fitteltem a syetvalasztott data-ra
 5. sklearn accuracy_score-ral megneztem hogy alap beallitason hogyan viselkedik. 78% szerintem eleg jo
 6. kiprobaltam mas min_sample_splittel pl.: 3, 4re rosszabb pontossagot kaptunk
+7. min_sample valtozasra hogy reagal:
+min_samples:  3  accuracy:  0.7822681443213065
+min_samples:  13  accuracy:  0.7822681443213065
+min_samples:  23  accuracy:  0.7822681443213065
+min_samples:  33  accuracy:  0.7822681443213065
+min_samples:  43  accuracy:  0.7822681443213065
+min_samples:  53  accuracy:  0.7822681443213065
+min_samples:  63  accuracy:  0.7822681443213065
+min_samples:  73  accuracy:  0.7822681443213065
+min_samples:  83  accuracy:  0.7822681443213065
+min_samples:  93  accuracy:  0.7822681443213065
+min_samples:  103  accuracy:  0.7822681443213065
+min_samples:  113  accuracy:  0.7822681443213065
+min_samples:  123  accuracy:  0.7822681443213065
+
+tul kicsi a max_depth!!!!
 
 
 
