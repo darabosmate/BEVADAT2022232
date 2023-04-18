@@ -81,6 +81,14 @@ class LinearRegression:
         for X in self.X_test:
             y_pred = self.m*X + self.c
             pred.append(y_pred)
-        return pred
+        self.predicted_values = pred
+
+    def evaluate(self, y_test: np.array):
+         # Calculate the Mean Absolue Error
+        print("Mean Absolute Error:", np.mean(np.abs(self.predicted_values - y_test)))
+
+        # Calculate the Mean Squared Error
+        print("Mean Squared Error:", np.mean((self.predicted_values - y_test)**2))
+
 
 
