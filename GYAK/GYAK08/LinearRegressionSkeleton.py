@@ -12,12 +12,11 @@ class LinearRegression:
         self.Y_train = y
         self.m = 0
         self.c = 0
-        epochs = 1000  # The number of iterations to perform gradient descent
         n = float(len(self.X_train)) # Number of elements in X
         losses = []
 
 
-        for i in range(epochs): 
+        for i in range(self.epochs): 
             y_pred = self.m*self.X_train + self.c  # The current predicted value of Y
             residuals = self.Y_train - y_pred
             loss = np.sum(residuals ** 2)
@@ -35,23 +34,24 @@ class LinearRegression:
 
 
 
-    def predict(self, X):
+    def predict(self, X: np.array):
         X_test = X
         pred = []
         for X in X_test:
             y_pred = self.m*X + self.c
             pred.append(y_pred)
-        self.predicted_values = pred
+        #self.predicted_values = pred
         return pred
 
     def evaluate(self, X_test: np.array, y_test: np.array):
-        y_pred = self.predict(X)
+        print(y_test.shape, X_test.shape)
+        y_pred = self.predict(X_test)
         y_pred = np.array(y_pred)
 
         # Calculate the Mean Absolue Error
-        print("Mean Absolute Error:", np.mean(np.abs(self.predicted_values - y_test)))
+        print("Mean Absolute Error:", np.mean(np.abs(y_pred - y_test)))
         # Calculate the Mean Squared Error
-        print("Mean Squared Error:", np.mean((self.predicted_values - y_test)**2))
+        print("Mean Squared Error:", np.mean((y_pred - y_test)**2))
 
 
 
