@@ -44,10 +44,8 @@ class LinearRegression:
         return pred
 
     def evaluate(self, X_test: np.array, y_test: np.array):
-        print(y_test.shape, X_test.shape)
         y_pred = self.predict(X_test)
         y_pred = np.array(y_pred)
-
         # Calculate the Mean Absolue Error
         print("Mean Absolute Error:", np.mean(np.abs(y_pred - y_test)))
         # Calculate the Mean Squared Error
