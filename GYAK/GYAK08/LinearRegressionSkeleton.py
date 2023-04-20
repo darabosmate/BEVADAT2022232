@@ -42,6 +42,7 @@ class LinearRegression:
             y_pred = self.m*X + self.c
             pred.append(y_pred)
         self.predicted_values = pred
+        return pred
 
     def evaluate(self, X_test: np.array, y_test: np.array):
         y_pred = self.predict(X)
