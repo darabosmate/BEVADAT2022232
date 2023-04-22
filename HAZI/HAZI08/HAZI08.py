@@ -83,9 +83,7 @@ def plot_actual_vs_predicted(y_test, y_pred):
 
 #10
 def evaluate_model(y_test, y_pred):
-    squared_errors = [(yt - yp) ** 2 for yt, yp in zip(y_test, y_pred)]
-    mse = sum(squared_errors) / len(y_test)
+    mse = mean_squared_error(y_test, y_pred)
     return mse
-
 
 
