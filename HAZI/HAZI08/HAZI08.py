@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+import sklearn
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, LogisticRegression
@@ -81,8 +82,12 @@ függvény neve: logistic_train_data
 def logistic_train_data(input)-> (np.ndarray, np.ndarray):
     df_features = pd.DataFrame(input.data).iloc[:, :2]
     df_features.columns = input.feature_names[:2]
+    df_target = pd.DataFrame(input.target)
+    df_target.columns = ['target']
+    df = pd.concat([df_features, df_target], axis=1)
+    df = df[df.target < 2]
     
-    return df_features
+    return df.loc[:, ['sepal length (cm)', 'sepal width (cm)']].to_numpy(), df.loc[:, 'target'].to_numpy()
 
 # %%
 '''
@@ -96,7 +101,18 @@ függvény neve: split_data
 '''
 
 # %%
+def split_data(X, y):
+    #X = X.sample(frac=1, random_state=42)
+    np.random.seed()
+    np.random.shuffle(X)
+    np.random.shuffle(y)
+    test_ratio = 0.2
+    test_size = int(np.shape(X)[0] * test_ratio)
+    X_test, X_train = X[:test_size], X[test_size:]
+    y_test, y_train = y[:test_size], y[test_size:]
 
+
+    return X_train, X_test, y_train, y_test
 
 # %%
 '''
@@ -109,7 +125,9 @@ függvény neve: train_linear_regression
 '''
 
 # %%
-
+def train_linear_regression(X_train, y_train):
+    lin_reg = LinearRegression().fit(X_train, y_train)
+    return lin_reg
 
 # %%
 '''
@@ -122,7 +140,9 @@ függvény neve: train_logistic_regression
 '''
 
 # %%
-
+def train_logistic_regression(X_train, y_train):
+    log_reg = LogisticRegression().fit(X_train, y_train)
+    return log_reg
 
 # %%
 ''' 
@@ -135,6 +155,10 @@ függvény neve: predict
 '''
 
 # %%
+#model: LogisticRegression
+def predict(model, X_test)-> np.ndarray:
+    y_pred = model.predict(X_test)
+    return y_pred
 
 
 # %%
@@ -153,6 +177,17 @@ függvény neve: plot_actual_vs_predicted
 '''
 
 # %%
+def plot_actual_vs_predicted(y_test, y_pred):
+    fig, ax = plt.subplots()
+
+    ax.set_xlabel('Actual')
+    ax.set_ylabel('Predicted')
+    ax.set_title('Actual vs Predicted Target Values')
+
+    #fig.scatter(y_test, y_pred)
+    #ax.plot(y_test, y_pred)
+    ax.scatter(y_test, y_pred)
+    return fig
 
 
 # %%
@@ -166,6 +201,10 @@ függvény neve: evaluate_model
 '''
 
 # %%
+def evaluate_model(y_test, y_pred):
+    squared_errors = [(yt - yp) ** 2 for yt, yp in zip(y_test, y_pred)]
+    mse = sum(squared_errors) / len(y_test)
+    return mse
 
 
 
