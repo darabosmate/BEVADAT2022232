@@ -41,15 +41,7 @@ def logistic_train_data(input)-> (np.ndarray, np.ndarray):
 
 #5
 def split_data(X, y):
-    #X = X.sample(frac=1, random_state=42)
-    np.random.seed()
-    np.random.shuffle(X)
-    np.random.shuffle(y)
-    test_ratio = 0.2
-    test_size = int(np.shape(X)[0] * test_ratio)
-    X_test, X_train = X[:test_size], X[test_size:]
-    y_test, y_train = y[:test_size], y[test_size:]
-
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     return X_train, X_test, y_train, y_test
 
@@ -86,5 +78,12 @@ def plot_actual_vs_predicted(y_test, y_pred):
 def evaluate_model(y_test, y_pred):
     mse = mean_squared_error(y_test, y_pred)
     return mse
+def test_plot(y_test, y_pred):
+    fig, ax = plt.subplots()
 
+    ax.set_xlabel('Actual')
+    ax.set_ylabel('Predicted')
+    ax.set_title('Actual vs Predicted Target Values')
+    ax.scatter(y_test, y_pred)
+    return fig
 
