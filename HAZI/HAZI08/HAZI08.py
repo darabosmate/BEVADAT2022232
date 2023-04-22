@@ -78,7 +78,11 @@ függvény neve: logistic_train_data
 '''
 
 # %%
-
+def logistic_train_data(input)-> (np.ndarray, np.ndarray):
+    df_features = pd.DataFrame(input.data).iloc[:, :2]
+    df_features.columns = input.feature_names[:2]
+    
+    return df_features
 
 # %%
 '''
