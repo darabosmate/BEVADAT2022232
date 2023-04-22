@@ -23,7 +23,7 @@ def load_iris_data() : #-> sklearn.utils.Bunch, -> sklearn.utils._bunch.Bunch
     iris = load_iris()
     return iris
 
-iris_data = load_iris_data()
+#iris_data = load_iris_data()
 #iris_data
 
 # %%
