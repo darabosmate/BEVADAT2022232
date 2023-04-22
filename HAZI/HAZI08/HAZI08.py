@@ -17,7 +17,8 @@ def load_iris_data() : #-> sklearn.utils.Bunch, -> sklearn.utils._bunch.Bunch
 def check_data(iris)-> pd.core.frame.DataFrame:
     df = pd.DataFrame(iris.data) #, columns=[iris['sepal length (cm)', 'sepal width (cm)']]
     df.columns = iris.feature_names
-    return df.iloc[:, :2].head(5)
+    ndf = df.head(5)
+    return ndf
 
 #3
 def linear_train_data(input)-> (np.ndarray, np.ndarray):
