@@ -30,14 +30,14 @@ def linear_train_data(input)-> (np.ndarray, np.ndarray):
 
 #4
 def logistic_train_data(input)-> (np.ndarray, np.ndarray):
-    df_features = pd.DataFrame(input.data).iloc[:, :2]
-    df_features.columns = input.feature_names[:2]
+    df_features = pd.DataFrame(input.data)#.iloc[:, :2]
+    df_features.columns = input.feature_names#[:2]
     df_target = pd.DataFrame(input.target)
     df_target.columns = ['target']
     df = pd.concat([df_features, df_target], axis=1)
     df = df[df.target < 2]
     
-    return df.loc[:, ['sepal length (cm)', 'sepal width (cm)']].to_numpy(), df.loc[:, 'target'].to_numpy()
+    return df.iloc[:, :4].values, df.loc[:, 'target'].values
 
 #5
 def split_data(X, y):
