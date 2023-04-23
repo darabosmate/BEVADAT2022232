@@ -24,9 +24,9 @@ def check_data(iris)-> pd.core.frame.DataFrame:
 def linear_train_data(input)-> (np.ndarray, np.ndarray):
     df = pd.DataFrame(input.data)
     df.columns = input.feature_names
-    df.drop(columns=['petal length (cm)', 'petal width (cm)'], inplace=True)
+    #df.drop(columns=['petal length (cm)', 'petal width (cm)'], inplace=True)
     
-    return (df.iloc[:, 0].to_numpy(), df.iloc[:, 1].to_numpy())
+    return (df.iloc[:, 0:3].values, df.iloc[:, 3:].values)
 
 #4
 def logistic_train_data(input)-> (np.ndarray, np.ndarray):
