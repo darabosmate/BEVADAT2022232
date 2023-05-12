@@ -14,7 +14,6 @@ def mnist_digit_data():
     return X_train, y_train, X_test, y_test
 
 
-print(mnist_digit_data()[0][0])
 '''
 Készíts egy neurális hálót, ami képes felismerni a kézírásos számokat.
 A háló kimenete legyen 10 elemű, és a softmax aktivációs függvényt használja.
